@@ -31,6 +31,7 @@ class Home extends Controller
     public function post_add(Request $request){
         $post = $request->post();
 
+
         // 验证数据
         $validate = Validate::make([
             'path' => 'require',
