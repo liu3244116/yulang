@@ -12,7 +12,7 @@ use think\View;
 class Home extends Controller
 {
     /**
-     * 首页设置显示页
+     * 首页设置列表
      */
     public function index(){
         $settings = Db::table('yl_home')->select();
@@ -59,6 +59,58 @@ class Home extends Controller
      */
     public function delete(Request $request){
         $post = $request->post();
-        halt($post);
+        $id = $post['id'];
+        $setting = Db::table('yl_home')->find($id);
+        if(empty($setting)){
+            return $this->error('未找到您所要删除的配置');
+        }
+         $result = Db::table('yl_home')->delete($id);
+        if($result === 0){
+            return $this->error('删除失败');
+        }
+        return $this->success('删除成功');
+    }
+
+    /**
+     * 修改某条设置
+     */
+    public function edit(Request $request){
+        $get = $request->get();
+        $id = $get['id'];
+        $setting = Db::table('yl_home')->find($id);
+        if(empty($setting)){
+            return $this->error('未找到您所要修改的配置');
+        }
+
+        return view('', compact('setting'));
+    }
+    public function post_edit(Request $request){
+        $post = $request->post();
+        // 验证数据
+        $id = $post['id'];
+        $setting = Db::table('yl_home')->find($id);
+        if(empty($setting)){
+            return $this->error('未找到您所要修改的配置');
+        }
+        $validate = Validate::make([
+            'path' => 'require',
+            'type' => 'require'
+        ]);
+        $status = $validate->check($post);
+        if(! $status){
+            return $this->error($validate->getError());
+        }
+
+        // 验证通过，保存数据到数据库
+        $result = Db::table('yl_home')->where('id', $id)->update([
+            'type' => $post['type'],
+            'path' => $post['path'],
+            'desc' => $post['desc'],
+            'btn_url' => $post['btn_url'],
+        ]);
+        if($result === 0){
+            return $this->error('保存失败');
+        }
+        return $this->success('保存成功', '/index/home');
     }
 }

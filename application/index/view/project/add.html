@@ -1,17 +1,29 @@
 {extend name='./common/layout'}
 
 {block name='mid'}
-<h3>新增首页设置</h3>
-<form id="data-form" method="post" action="/index/home/post_add">
+<h3>新增项目设置</h3>
+<form id="data-form" method="post" action="/index/project/post_add">
     <div class="box box-default">
         <!-- /.box-header -->
         <div class="box-body">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>显示文件（图片或视频）<font color="red">*</font></label>
+                        <label>缩略图<font color="red">*</font></label>
                         <img id="show_img" class="img-responsive" style="height: 150px" src="" onerror="javascript:this.src='/../static/img/default.jpg';" alt="缩略图">
+                        <input type="hidden" class="form-control" placeholder="" id="img" name="img">
                         <input type="hidden" class="form-control" placeholder="" id="path" name="path">
+                    </div>
+                    <div class="form-group">
+                        <label>缩略图上传<font color="red">*</font></label>
+                        <input id="img_upload_button" class="upload_button" type="file" multiple="true" value="" />
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>项目名称</label>
+                        <input type="text" class="form-control" placeholder="" name="title">
                     </div>
                     <!-- /.form-group -->
                     <div class="form-group">
@@ -28,25 +40,22 @@
                         </div>
                     </div>
                     <!-- /.form-group -->
-                </div>
-                <!-- /.col -->
-                <div class="col-md-6">
                     <div class="form-group">
-                        <label>文件上传<font color="red">*</font></label>
+                        <label>内容文件上传<font color="red">*</font></label>
+                        <br><a href="" target="_blank" id="path_link"></a>
                         <input id="upload_button" class="upload_button" type="file" multiple="true" value="" />
                     </div>
-                    <div class="form-group">
-                        <label>文字描述</label>
-                        <textarea class="form-control" rows="3" placeholder="" name="desc"></textarea>
-                    </div>
-                    <!-- /.form-group -->
-                    <div class="form-group">
-                        <label>点击跳转地址</label>
-                        <input type="text" class="form-control" placeholder="" name="btn_url">
-                    </div>
                     <!-- /.form-group -->
                 </div>
                 <!-- /.col -->
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>文字描述</label>
+                        <textarea class="form-control" id="content" name="content" rows="10" cols="80"></textarea>
+                    </div>
+                </div>
             </div>
             <!-- /.row -->
 
@@ -57,13 +66,28 @@
     </div>
 </form>
 <script type="text/javascript">
-    $('#upload_button').uploadify({
+    $(function () {
+        CKEDITOR.replace('content');
+        $('.textarea').wysihtml5();
+    });
+    $('#img_upload_button').uploadify({
         'swf'      : '/../static/uploadify/uploadify.swf',
         'uploader' : '/index/upload/uploadify',//这个就是处理上传文件的地址
         'buttonText' : '上传文件',
         'fileObjName': "myfile",
         'onUploadSuccess' : function(file, data, response) {
             $('#show_img').attr('src', '/../upload/' + data);
+            $('#img').val(data);
+        }
+    });
+    $('#upload_button').uploadify({
+        'swf'      : '/../static/uploadify/uploadify.swf',
+        'uploader' : '/index/upload/uploadify',//这个就是处理上传文件的地址
+        'buttonText' : '上传文件',
+        'fileObjName': "myfile",
+        'onUploadSuccess' : function(file, data, response) {
+            $("#path_link").attr('href', '/../upload/' + data)
+            $("#path_link").html('/../upload/' + data)
             $('#path').val(data);
         }
     });

@@ -1,8 +1,8 @@
 {extend name='./common/layout'}
 
 {block name='mid'}
-<h3>新增首页设置</h3>
-<form id="data-form" method="post" action="/index/home/post_add">
+<h3>修改设置</h3>
+<form id="data-form" method="post" action="/index/home/post_edit">
     <div class="box box-default">
         <!-- /.box-header -->
         <div class="box-body">
@@ -10,19 +10,20 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>显示文件（图片或视频）<font color="red">*</font></label>
-                        <img id="show_img" class="img-responsive" style="height: 150px" src="" onerror="javascript:this.src='/../static/img/default.jpg';" alt="缩略图">
-                        <input type="hidden" class="form-control" placeholder="" id="path" name="path">
+                        <img id="show_img" class="img-responsive" style="height: 150px" src="/../upload/{$setting['path']}" onerror="javascript:this.src='/../static/img/default.jpg';" alt="缩略图">
+                        <input type="hidden" name="id" value="{$setting['id']}">
+                        <input type="hidden" class="form-control" placeholder="" id="path" name="path" value="{$setting['path']}">
                     </div>
                     <!-- /.form-group -->
                     <div class="form-group">
                         <label>文件类型<font color="red">*</font></label>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="type" value="0" checked>
+                                <input type="radio" name="type" value="0" {$setting['type'] == 0 ? 'checked' : ''}>
                                 图片
                             </label>
                             <label>
-                                <input type="radio" name="type" value="1">
+                                <input type="radio" name="type" value="1" {$setting['type'] == 1 ? 'checked' : ''}>
                                 视频
                             </label>
                         </div>
@@ -37,12 +38,12 @@
                     </div>
                     <div class="form-group">
                         <label>文字描述</label>
-                        <textarea class="form-control" rows="3" placeholder="" name="desc"></textarea>
+                        <textarea class="form-control" rows="3" placeholder="" name="desc">{$setting["desc"]}</textarea>
                     </div>
                     <!-- /.form-group -->
                     <div class="form-group">
                         <label>点击跳转地址</label>
-                        <input type="text" class="form-control" placeholder="" name="btn_url">
+                        <input type="text" class="form-control" placeholder="" name="btn_url" value="{$setting['btn_url']}">
                     </div>
                     <!-- /.form-group -->
                 </div>

@@ -1,0 +1,96 @@
+{extend name='./common/layout'}
+
+{block name='mid'}
+<h3>新增项目设置</h3>
+<form id="data-form" method="post" action="/index/project/post_edit">
+    <div class="box box-default">
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>缩略图<font color="red">*</font></label>
+                        <img id="show_img" class="img-responsive" style="height: 150px" src="/../upload/{$project['img']}" onerror="javascript:this.src='/../static/img/default.jpg';" alt="缩略图">
+                        <input type="hidden" name="id" value="{$project['id']}">
+                        <input type="hidden" class="form-control" placeholder="" id="img" name="img" value="{$project['img']}">
+                        <input type="hidden" class="form-control" placeholder="" id="path" name="path" value="{$project['path']}">
+                    </div>
+                    <div class="form-group">
+                        <label>缩略图上传<font color="red">*</font></label>
+                        <input id="img_upload_button" class="upload_button" type="file" multiple="true" value="" />
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>项目名称</label>
+                        <input type="text" class="form-control" placeholder="" name="title" value="{$project['title']}">
+                    </div>
+                    <!-- /.form-group -->
+                    <div class="form-group">
+                        <label>文件类型<font color="red">*</font></label>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="type" value="0"  {$project['type'] == 0 ? 'checked' : ''}>
+                                图片
+                            </label>
+                            <label>
+                                <input type="radio" name="type" value="1"  {$project['type'] == 1 ? 'checked' : ''}>
+                                视频
+                            </label>
+                        </div>
+                    </div>
+                    <!-- /.form-group -->
+                    <div class="form-group">
+                        <label>内容文件上传<font color="red">*</font></label>
+                        <br><a href="/../upload/{$project['path']}" target="_blank" id="path_link">/../upload/{$project['path']}</a>
+                        <input id="upload_button" class="upload_button" type="file" multiple="true" value="" />
+                    </div>
+                    <!-- /.form-group -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>文字描述</label>
+                        <textarea class="form-control" id="content" name="content" rows="10" cols="80">{$project["content"]}</textarea>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(function () {
+        CKEDITOR.replace('content');
+        $('.textarea').wysihtml5();
+    });
+    $('#img_upload_button').uploadify({
+        'swf'      : '/../static/uploadify/uploadify.swf',
+        'uploader' : '/index/upload/uploadify',//这个就是处理上传文件的地址
+        'buttonText' : '上传文件',
+        'fileObjName': "myfile",
+        'onUploadSuccess' : function(file, data, response) {
+            $('#show_img').attr('src', '/../upload/' + data);
+            $('#img').val(data);
+        }
+    });
+    $('#upload_button').uploadify({
+        'swf'      : '/../static/uploadify/uploadify.swf',
+        'uploader' : '/index/upload/uploadify',//这个就是处理上传文件的地址
+        'buttonText' : '上传文件',
+        'fileObjName': "myfile",
+        'onUploadSuccess' : function(file, data, response) {
+            $("#path_link").attr('href', '/../upload/' + data)
+            $("#path_link").html('/../upload/' + data)
+            $('#path').val(data);
+        }
+    });
+</script>
+{/block}
