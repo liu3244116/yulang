@@ -9,7 +9,7 @@ use think\Request;
 use think\Validate;
 use think\View;
 
-class Home extends Controller
+class Home extends Common
 {
     /**
      * 首页设置列表

@@ -6,7 +6,7 @@ use think\Controller;
 use think\Db;
 use think\Request;
 
-class About extends Controller
+class About extends Common
 {
     /**
      * 关于我们设置显示

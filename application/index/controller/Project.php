@@ -7,7 +7,7 @@ use think\Db;
 use think\Request;
 use think\Validate;
 
-class Project extends Controller
+class Project extends Common
 {
     /**
      * 公司项目设置列表

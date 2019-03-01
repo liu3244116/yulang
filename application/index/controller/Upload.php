@@ -5,7 +5,7 @@ namespace app\index\controller;
 use think\Controller;
 use think\view\driver\Think;
 
-class Upload extends Controller
+class Upload extends Common
 {
     public function uploadify(){
         $file = $file = request()->file('myfile');

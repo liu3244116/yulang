@@ -42,6 +42,7 @@
                     <!-- /.form-group -->
                     <div class="form-group">
                         <label>文件上传<font color="red">*</font></label>
+                        <br><a href="/../upload/{$data['profile']['path']}" target="_blank" id="profile_path_link">/../upload/{$data['profile']['path']}</a>
                         <input id="profile_upload_button" class="upload_button" type="file" multiple="true" value="" />
                     </div>
                     <!-- /.form-group -->
@@ -99,6 +100,7 @@
                     <!-- /.form-group -->
                     <div class="form-group">
                         <label>文件上传<font color="red">*</font></label>
+                        <br><a href="/../upload/{$data['culture']['path']}" target="_blank" id="culture_path_link">/../upload/{$data['culture']['path']}</a>
                         <input id="culture_upload_button" class="upload_button" type="file" multiple="true" value="" />
                     </div>
                     <!-- /.form-group -->
@@ -135,6 +137,8 @@
         'fileObjName': "myfile",
         'onUploadSuccess' : function(file, data, response) {
             $('#profile_show_img').attr('src', '/../upload/' + data);
+            $("#profile_path_link").attr('href', '/../upload/' + data)
+            $("#profile_path_link").html('/../upload/' + data)
             $('#profile_path').val(data);
         }
     });
@@ -145,6 +149,8 @@
         'fileObjName': "myfile",
         'onUploadSuccess' : function(file, data, response) {
             $('#culture_show_img').attr('src', '/../upload/' + data);
+            $("#culture_path_link").attr('href', '/../upload/' + data)
+            $("#culture_path_link").html('/../upload/' + data)
             $('#culture_path').val(data);
         }
     });
