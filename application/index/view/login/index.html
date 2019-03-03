@@ -7,15 +7,15 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="/../static/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__ROOT__/static/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="/../static/AdminLTE/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="__ROOT__/static/AdminLTE/bower_components/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="/../static/AdminLTE/bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="__ROOT__/static/AdminLTE/bower_components/Ionicons/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="/../static/AdminLTE/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="__ROOT__/static/AdminLTE/dist/css/AdminLTE.min.css">
     <!-- iCheck -->
-    <link rel="stylesheet" href="/../static/AdminLTE/plugins/iCheck/square/blue.css">
+    <link rel="stylesheet" href="__ROOT__/static/AdminLTE/plugins/iCheck/square/blue.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,20 +24,20 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <!-- jQuery 3 -->
-    <script src="/../static/AdminLTE/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="__ROOT__/static/AdminLTE/bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap 3.3.7 -->
-    <script src="/../static/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="__ROOT__/static/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- iCheck -->
-    <script src="/../static/AdminLTE/plugins/iCheck/icheck.min.js"></script>
+    <script src="__ROOT__/static/AdminLTE/plugins/iCheck/icheck.min.js"></script>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="../../index2.html">驭浪官网管理</a>
+        <a href="__ROOT__/index2.html">驭浪官网管理</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <form action="/index/login/post" method="post">
+        <form action="{:url('Login/post')}" method="post">
             <div class="form-group has-feedback">
                 <input type="input" class="form-control" placeholder="账号" name="账号">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

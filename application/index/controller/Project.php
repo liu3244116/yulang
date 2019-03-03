@@ -51,7 +51,7 @@ class Project extends Common
         if($result === 0){
             return $this->error('保存失败');
         }
-        return $this->success('保存成功', '/index/project');
+        return $this->success('保存成功', '/public/index/project');
     }
 
     /**
@@ -114,6 +114,6 @@ class Project extends Common
         if($result === 0){
             return $this->error('保存失败');
         }
-        return $this->success('保存成功', '/index/project');
+        return $this->success('保存成功', '/public/index/project');
     }
 }

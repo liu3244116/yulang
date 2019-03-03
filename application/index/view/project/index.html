@@ -7,7 +7,7 @@
             <div class="box-header">
                 <h3 class="box-title">项目设置</h3>
                 <div class="box-tools">
-                    <a href="/index/project/add" class="btn btn-block btn-info btn-xs" style="width: 50px">新增</a>
+                    <a href="{:url('Project/add')}" class="btn btn-block btn-info btn-xs" style="width: 50px">新增</a>
                 </div>
             </div>
             <!-- /.box-header -->
@@ -23,13 +23,13 @@
                     </tr>
                     {foreach $projects as $project}
                     <tr>
-                        <td><img id="show_img" class="img-responsive" style="height: 50px" src="/../upload/{$project['img']}" onerror="javascript:this.src='/../static/img/default.jpg';" alt="缩略图"></td>
+                        <td><img id="show_img" class="img-responsive" style="height: 50px" src="__ROOT__/upload/{$project['img']}" onerror="javascript:this.src='__ROOT__/static/img/default.jpg';" alt="缩略图"></td>
                         <td>{$project['title']}</td>
-                        <td><a href="/../upload/{$project['path']}" target="_blank" id="path_link">/../upload/{$project['path']}</a></td>
+                        <td><a href="__ROOT__/upload/{$project['path']}" target="_blank" id="path_link">__ROOT__/upload/{$project['path']}</a></td>
                         <td>{$project['type'] === 0 ? '图片' : '视频'}</td>
                         <td>{$project['content']}</td>
                         <td>
-                            <a href="/index/project/edit?id={$project['id']}" class="btn btn-block btn-info btn-xs" style="width: 50px">修改</a>
+                            <a href="/public/index/project/edit?id={$project['id']}" class="btn btn-block btn-info btn-xs" style="width: 50px">修改</a>
                             <button type="button" style="width: 50px" class="btn btn-block btn-danger btn-xs delete-btn" data-id="{$project['id']}">删除</button>
                         </td>
                     </tr>
@@ -46,7 +46,7 @@
     $(".delete-btn").click(function(){
         var id = $(this).attr("data-id");
         var that = $(this);
-        $.post("/index/project/delete", {'id': id}, function(data){
+        $.post("{:url('Project/delete')}", {'id': id}, function(data){
             if(data.code === 1){
                 that.parents('tr').remove();
             }

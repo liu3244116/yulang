@@ -52,7 +52,7 @@ class Home extends Common
         if($result === 0){
             return $this->error('保存失败');
         }
-        return $this->success('保存成功', '/index/home');
+        return $this->success('保存成功', '/public/index/home');
     }
 
     /**
@@ -112,6 +112,6 @@ class Home extends Common
         if($result === 0){
             return $this->error('保存失败');
         }
-        return $this->success('保存成功', '/index/home');
+        return $this->success('保存成功', '/public/index/home');
     }
 }

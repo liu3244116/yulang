@@ -47,6 +47,6 @@ class About extends Common
         if($profile_result === 0 || $culture_result === 0){
             return $this->error('保存失败');
         }
-        return $this->success('保存成功', '/index/about');
+        return $this->success('保存成功', '/public/index/about');
     }
 }

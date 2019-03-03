@@ -2,7 +2,7 @@
 
 {block name='mid'}
 <h3>新增项目设置</h3>
-<form id="data-form" method="post" action="/index/project/post_add">
+<form id="data-form" method="post" action="{:url('Project/post_add')}">
     <div class="box box-default">
         <!-- /.box-header -->
         <div class="box-body">
@@ -10,13 +10,14 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>缩略图<font color="red">*</font></label>
-                        <img id="show_img" class="img-responsive" style="height: 150px" src="" onerror="javascript:this.src='/../static/img/default.jpg';" alt="缩略图">
+                        <img id="show_img" class="img-responsive" style="height: 150px" src="" onerror="javascript:this.src='__ROOT__/static/img/default.jpg';" alt="缩略图">
                         <input type="hidden" class="form-control" placeholder="" id="img" name="img">
                         <input type="hidden" class="form-control" placeholder="" id="path" name="path">
                     </div>
                     <div class="form-group">
                         <label>缩略图上传<font color="red">*</font></label>
                         <input id="img_upload_button" class="upload_button" type="file" multiple="true" value="" />
+                        <div id="queue"></div>
                     </div>
                 </div>
                 <!-- /.col -->
@@ -42,8 +43,9 @@
                     <!-- /.form-group -->
                     <div class="form-group">
                         <label>内容文件上传<font color="red">*</font></label>
-                        <br><a href="" target="_blank" id="path_link"></a>
                         <input id="upload_button" class="upload_button" type="file" multiple="true" value="" />
+                        <div id="queue1"></div>
+                        <br><a href="" target="_blank" id="path_link"></a>
                     </div>
                     <!-- /.form-group -->
                 </div>
@@ -70,26 +72,17 @@
         CKEDITOR.replace('content');
         $('.textarea').wysihtml5();
     });
-    $('#img_upload_button').uploadify({
-        'swf'      : '/../static/uploadify/uploadify.swf',
-        'uploader' : '/index/upload/uploadify',//这个就是处理上传文件的地址
-        'buttonText' : '上传文件',
-        'fileObjName': "myfile",
-        'onUploadSuccess' : function(file, data, response) {
-            $('#show_img').attr('src', '/../upload/' + data);
+
+    $(document).ready(function(){
+        BindUploadifive($('#img_upload_button'), {}, function (file, data) {
+            $('#show_img').attr('src', '__ROOT__/upload/' + data);
             $('#img').val(data);
-        }
-    });
-    $('#upload_button').uploadify({
-        'swf'      : '/../static/uploadify/uploadify.swf',
-        'uploader' : '/index/upload/uploadify',//这个就是处理上传文件的地址
-        'buttonText' : '上传文件',
-        'fileObjName': "myfile",
-        'onUploadSuccess' : function(file, data, response) {
-            $("#path_link").attr('href', '/../upload/' + data)
-            $("#path_link").html('/../upload/' + data)
+        });
+        BindUploadifive($('#upload_button'), {'queueID': 'queue1'}, function (file, data) {
+            $("#path_link").attr('href', '__ROOT__/upload/' + data)
+            $("#path_link").html('预览已上传文件')
             $('#path').val(data);
-        }
+        });
     });
 </script>
 {/block}

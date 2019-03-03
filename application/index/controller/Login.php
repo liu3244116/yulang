@@ -31,7 +31,6 @@ class Login extends Controller
         if(! $status){
             return $this->error($validate->getError());
         }
-
         $user = Db::table('yl_users')->where('username', $post['账号'])->where('password', md5($post['密码']))->find();
         if(empty($user)){
             $this->error('登陆失败，请检查账号和密码');
@@ -41,7 +40,7 @@ class Login extends Controller
         unset($user["password"]);
         session("user", $user);
 
-        $this->redirect('/index/home');
+        $this->redirect('/public/index/home');
     }
 
     /**
@@ -49,6 +48,6 @@ class Login extends Controller
      */
     public function logout(){
         Session::delete('user');
-        $this->redirect('/index/login');
+        $this->redirect('/public/index/login');
     }
 }

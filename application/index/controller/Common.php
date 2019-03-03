@@ -14,7 +14,7 @@ class Common extends Controller
         //判断用户是否已经登录
         $user = Session::get('user');
         if (!$user)  {
-            $this->redirect('/index/login');
+//             $this->redirect('/index/login');
         }
     }
 }
